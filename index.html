@@ -1,1 +1,1496 @@
-!DOCTYPE html><html><head><title>Fastidox</title></head><body><h1>Fastidox</h1><p>Official developer site.</p></body></html
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>FASTIDOX | Smart Intermittent Fasting Tracker</title>
+  <meta name="description" content="FASTIDOX - Clean, smart intermittent fasting tracker. Real-time fasting timer, 16:8 protocols, fat burn estimation, hydration & nutrition logs. 100% local-first privacy.">
+  
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="favicon.png">
+  <link rel="apple-touch-icon" href="app_icon.png">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="FASTIDOX | Smart Intermittent Fasting Tracker">
+  <meta property="og:description" content="Live fasting timer, 16:8 protocols, fat burn tracking, hydration & nutrition logs. Zero accounts, 100% privacy.">
+  <meta property="og:image" content="https://fastidox.github.io/Fastidox/app_icon.png">
+  <meta property="og:url" content="https://fastidox.github.io/Fastidox/">
+
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --primary: #10B981;
+      --primary-dark: #059669;
+      --primary-deep: #064E3B;
+      --brand-green: #05533D;
+      --accent: #34D399;
+      --accent-glow: rgba(16, 185, 129, 0.25);
+      
+      --bg-dark: #0A0F1D;
+      --bg-card: #111827;
+      --bg-card-hover: #1A2234;
+      --border: #1F2937;
+      --border-light: rgba(255, 255, 255, 0.08);
+
+      --text-main: #F9FAFB;
+      --text-muted: #9CA3AF;
+      --text-sub: #D1D5DB;
+
+      --gold: #F59E0B;
+      --cyan: #06B6D4;
+      --purple: #8B5CF6;
+      --rose: #F43F5E;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-main);
+    }
+
+    body {
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    /* Ambient background lighting */
+    .ambient-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: -1;
+      pointer-events: none;
+      background: 
+        radial-gradient(circle at 80% 15%, rgba(5, 83, 61, 0.4) 0%, transparent 50%),
+        radial-gradient(circle at 15% 65%, rgba(16, 185, 129, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 50% 95%, rgba(6, 78, 59, 0.25) 0%, transparent 60%);
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Navigation */
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      background: rgba(10, 15, 29, 0.85);
+      border-bottom: 1px solid var(--border-light);
+      padding: 0.85rem 0;
+    }
+
+    .nav-inner {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 0.85rem;
+      text-decoration: none;
+      color: var(--text-main);
+    }
+
+    .brand-icon-wrap {
+      width: 44px;
+      height: 44px;
+      border-radius: 12px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #05533D;
+      box-shadow: 0 4px 14px rgba(16, 185, 129, 0.35);
+      flex-shrink: 0;
+    }
+
+    .brand-icon {
+      width: 44px;
+      height: 44px;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .brand-name {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.45rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      background: linear-gradient(135deg, #FFFFFF 30%, #34D399 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+      align-items: center;
+    }
+
+    .nav-links a {
+      color: var(--text-sub);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--primary);
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      padding: 0.75rem 1.6rem;
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-family: 'Inter', sans-serif;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: all 0.25s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+      color: #FFFFFF;
+      box-shadow: 0 4px 20px var(--accent-glow);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(16, 185, 129, 0.4);
+      background: linear-gradient(135deg, #34D399 0%, #059669 100%);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--text-main);
+      border: 1px solid var(--border-light);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.12);
+      transform: translateY(-2px);
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 4.5rem 0 4.5rem;
+      position: relative;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 3.5rem;
+      align-items: center;
+    }
+
+    /* Featured App Card in Hero */
+    .hero-app-intro {
+      display: inline-flex;
+      align-items: center;
+      gap: 1.15rem;
+      background: rgba(17, 24, 39, 0.75);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 0.75rem 1.35rem 0.75rem 0.9rem;
+      border-radius: 20px;
+      backdrop-filter: blur(12px);
+      margin-bottom: 1.5rem;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+    }
+
+    .hero-app-icon-box {
+      width: 64px;
+      height: 64px;
+      border-radius: 16px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #05533D;
+      box-shadow: 0 6px 20px rgba(16, 185, 129, 0.35);
+    }
+
+    .hero-main-icon {
+      width: 64px;
+      height: 64px;
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .hero-app-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      letter-spacing: 0.5px;
+      line-height: 1.15;
+    }
+
+    .hero-app-tagline {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+      margin-bottom: 0.2rem;
+    }
+
+    .hero-app-rating {
+      display: flex;
+      align-items: center;
+      gap: 0.45rem;
+      font-size: 0.78rem;
+    }
+
+    .stars {
+      color: #F59E0B;
+      letter-spacing: 1px;
+    }
+
+    .rating-text {
+      color: #34D399;
+      font-weight: 600;
+    }
+
+    .hero h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 3.3rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.5px;
+    }
+
+    .hero h1 span.gradient {
+      background: linear-gradient(135deg, #34D399 0%, #10B981 50%, #6EE7B7 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .hero p.lead {
+      font-size: 1.2rem;
+      color: var(--text-sub);
+      margin-bottom: 2.25rem;
+      max-width: 580px;
+      line-height: 1.7;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-bottom: 2.75rem;
+    }
+
+    .hero-trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1.8rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border-light);
+    }
+
+    .trust-item {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .trust-item svg {
+      width: 18px;
+      height: 18px;
+      fill: var(--primary);
+      flex-shrink: 0;
+    }
+
+    /* Phone Mockup */
+    .mockup-container {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .mockup-glow {
+      position: absolute;
+      width: 320px;
+      height: 480px;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.3) 0%, transparent 70%);
+      z-index: 0;
+      filter: blur(40px);
+    }
+
+    .phone-frame {
+      position: relative;
+      z-index: 1;
+      width: 330px;
+      background: #000000;
+      border: 8px solid #1E293B;
+      border-radius: 46px;
+      box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.8), 0 0 0 1px rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+    }
+
+    .phone-screen {
+      background: #0A0F1D;
+      padding: 1.2rem 1rem 1.4rem;
+      color: #FFFFFF;
+      min-height: 580px;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .phone-notch {
+      width: 110px;
+      height: 18px;
+      background: #1E293B;
+      border-radius: 0 0 14px 14px;
+      margin: -1.2rem auto 0.8rem;
+    }
+
+    .mock-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .mock-app-icon-mini {
+      width: 32px;
+      height: 32px;
+      border-radius: 9px;
+      overflow: hidden;
+      background: #05533D;
+      flex-shrink: 0;
+      box-shadow: 0 2px 8px rgba(16, 185, 129, 0.35);
+    }
+
+    .mock-title {
+      font-size: 0.95rem;
+      font-weight: 800;
+      font-family: 'Outfit', sans-serif;
+      line-height: 1.15;
+    }
+
+    .mock-tag {
+      background: rgba(16, 185, 129, 0.2);
+      color: #34D399;
+      font-size: 0.72rem;
+      padding: 0.15rem 0.5rem;
+      border-radius: 999px;
+      font-weight: 700;
+      letter-spacing: 0.3px;
+    }
+
+    /* Floating Badge on Phone Mockup */
+    .floating-icon-card {
+      position: absolute;
+      bottom: 25px;
+      right: -25px;
+      z-index: 10;
+      background: rgba(17, 24, 39, 0.9);
+      backdrop-filter: blur(16px);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      border-radius: 18px;
+      padding: 0.7rem 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.55), 0 0 20px rgba(16, 185, 129, 0.2);
+      animation: floatAnimation 4s ease-in-out infinite alternate;
+    }
+
+    @keyframes floatAnimation {
+      0% { transform: translateY(0); }
+      100% { transform: translateY(-8px); }
+    }
+
+    .floating-icon-img {
+      width: 42px;
+      height: 42px;
+      border-radius: 11px;
+      overflow: hidden;
+      flex-shrink: 0;
+      background: #05533D;
+      box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+    }
+
+    .floating-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      line-height: 1.15;
+    }
+
+    .floating-sub {
+      font-size: 0.75rem;
+      color: #34D399;
+      font-weight: 600;
+    }
+
+    /* Mock Timer Ring */
+    .mock-timer-card {
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 24px;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      position: relative;
+    }
+
+    .timer-circle-wrap {
+      width: 170px;
+      height: 170px;
+      margin: 0 auto 0.75rem;
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .timer-svg {
+      transform: rotate(-90deg);
+      width: 100%;
+      height: 100%;
+    }
+
+    .timer-circle-bg {
+      fill: none;
+      stroke: #1F2937;
+      stroke-width: 12;
+    }
+
+    .timer-circle-progress {
+      fill: none;
+      stroke: url(#timerGrad);
+      stroke-width: 12;
+      stroke-linecap: round;
+      stroke-dasharray: 440;
+      stroke-dashoffset: 44;
+      animation: pulseProgress 3s ease-in-out infinite alternate;
+    }
+
+    @keyframes pulseProgress {
+      0% { stroke-dashoffset: 55; }
+      100% { stroke-dashoffset: 35; }
+    }
+
+    .timer-center-text {
+      position: absolute;
+      text-align: center;
+    }
+
+    .timer-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.95rem;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: #FFFFFF;
+    }
+
+    .timer-lbl {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    .mock-stage-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      background: rgba(245, 158, 11, 0.15);
+      border: 1px solid rgba(245, 158, 11, 0.4);
+      color: #FBBF24;
+      padding: 0.25rem 0.8rem;
+      border-radius: 999px;
+      font-size: 0.8rem;
+      font-weight: 600;
+    }
+
+    /* Mock Mini Cards */
+    .mock-mini-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0.65rem;
+    }
+
+    .mock-mini-card {
+      background: #111827;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 16px;
+      padding: 0.75rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+
+    .mini-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 0.75rem;
+      color: var(--text-muted);
+    }
+
+    .mini-card-val {
+      font-size: 1.15rem;
+      font-weight: 700;
+      font-family: 'Outfit', sans-serif;
+      color: #FFFFFF;
+    }
+
+    .mini-card-sub {
+      font-size: 0.7rem;
+      color: var(--primary);
+    }
+
+    /* Sections */
+    section {
+      padding: 6rem 0;
+    }
+
+    .section-title-wrap {
+      text-align: center;
+      max-width: 760px;
+      margin: 0 auto 4rem;
+    }
+
+    .section-tag {
+      color: var(--primary);
+      font-weight: 700;
+      font-size: 0.88rem;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 0.5rem;
+      display: block;
+    }
+
+    .section-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.5rem;
+      font-weight: 800;
+      line-height: 1.25;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+    }
+
+    /* Metabolic Stages Timeline */
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 1.2rem;
+      position: relative;
+    }
+
+    .stage-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 1.75rem 1.25rem;
+      position: relative;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .stage-card:hover {
+      transform: translateY(-6px);
+      border-color: var(--primary);
+      box-shadow: 0 12px 30px rgba(16, 185, 129, 0.15);
+    }
+
+    .stage-time {
+      font-family: 'Outfit', sans-serif;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--primary);
+      background: rgba(16, 185, 129, 0.1);
+      padding: 0.2rem 0.6rem;
+      border-radius: 8px;
+      display: inline-block;
+      align-self: flex-start;
+      letter-spacing: 0.5px;
+    }
+
+    .stage-icon {
+      font-size: 2rem;
+      margin: 0.25rem 0;
+    }
+
+    .stage-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .stage-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* Features Grid */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 24px;
+      padding: 2.25rem;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(16, 185, 129, 0.4);
+      background: var(--bg-card-hover);
+      box-shadow: 0 16px 36px rgba(0, 0, 0, 0.4);
+    }
+
+    .feature-icon-box {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.6rem;
+      background: rgba(16, 185, 129, 0.12);
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .feature-card h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #FFFFFF;
+    }
+
+    .feature-card p {
+      color: var(--text-muted);
+      font-size: 0.98rem;
+      line-height: 1.65;
+    }
+
+    /* Protocols Section */
+    .protocols-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1.5rem;
+    }
+
+    .protocol-card {
+      background: linear-gradient(180deg, #111827 0%, #0D1320 100%);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 2.2rem 1.5rem;
+      text-align: center;
+      transition: all 0.3s ease;
+    }
+
+    .protocol-card.highlight {
+      border-color: var(--primary);
+      box-shadow: 0 8px 30px rgba(16, 185, 129, 0.2);
+      position: relative;
+    }
+
+    .protocol-badge {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: #000000;
+      font-size: 0.72rem;
+      font-weight: 800;
+      padding: 0.2rem 0.8rem;
+      border-radius: 999px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .protocol-ratio {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.6rem;
+      font-weight: 800;
+      color: #FFFFFF;
+      margin-bottom: 0.25rem;
+    }
+
+    .protocol-card h4 {
+      font-size: 1.15rem;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    .protocol-card p {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+    }
+
+    /* Privacy Banner */
+    .privacy-banner {
+      background: linear-gradient(135deg, rgba(5, 83, 61, 0.45) 0%, rgba(10, 15, 29, 0.9) 100%);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      border-radius: 32px;
+      padding: 3.5rem;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2.5rem;
+      align-items: center;
+      margin-top: 2rem;
+    }
+
+    .privacy-banner h3 {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2rem;
+      font-weight: 800;
+      margin-bottom: 1rem;
+    }
+
+    .privacy-banner p {
+      font-size: 1.15rem;
+      color: var(--text-sub);
+      max-width: 700px;
+      line-height: 1.7;
+    }
+
+    /* FAQ */
+    .faq-list {
+      max-width: 800px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.25rem;
+    }
+
+    .faq-item {
+      background: var(--bg-card);
+      border: 1px solid var(--border);
+      border-radius: 18px;
+      padding: 1.5rem 1.8rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .faq-item:hover {
+      border-color: var(--border-light);
+      background: var(--bg-card-hover);
+    }
+
+    .faq-q {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #FFFFFF;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .faq-q::after {
+      content: '+';
+      font-size: 1.4rem;
+      color: var(--primary);
+      transition: transform 0.2s ease;
+    }
+
+    .faq-item.active .faq-q::after {
+      content: '−';
+      transform: rotate(180deg);
+    }
+
+    .faq-a {
+      margin-top: 0.85rem;
+      font-size: 1rem;
+      color: var(--text-sub);
+      line-height: 1.65;
+      display: none;
+    }
+
+    .faq-item.active .faq-a {
+      display: block;
+    }
+
+    /* Footer */
+    footer {
+      background: #070B16;
+      border-top: 1px solid var(--border);
+      padding: 4rem 0 2rem;
+      color: var(--text-muted);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .footer-desc {
+      margin-top: 1rem;
+      max-width: 320px;
+      font-size: 0.95rem;
+      line-height: 1.6;
+    }
+
+    .footer-col h5 {
+      color: #FFFFFF;
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      margin-bottom: 1.2rem;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+    }
+
+    .footer-links a {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: color 0.2s;
+    }
+
+    .footer-links a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border-light);
+      font-size: 0.9rem;
+    }
+
+    .medical-notice {
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-radius: 12px;
+      padding: 1.1rem 1.25rem;
+      margin-bottom: 2rem;
+      font-size: 0.85rem;
+      line-height: 1.6;
+      color: var(--text-muted);
+      text-align: center;
+    }
+
+    /* Responsive */
+    @media (max-width: 1024px) {
+      .hero-grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      .hero-app-intro {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero p.lead {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .hero-actions {
+        justify-content: center;
+      }
+      .hero-trust {
+        justify-content: center;
+      }
+      .timeline {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .features-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .protocols-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .footer-grid {
+        grid-template-columns: 1fr 1fr;
+      }
+      .floating-icon-card {
+        right: 10px;
+        bottom: 10px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .hero h1 {
+        font-size: 2.3rem;
+      }
+      .timeline {
+        grid-template-columns: 1fr;
+      }
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
+      .protocols-grid {
+        grid-template-columns: 1fr;
+      }
+      .nav-links {
+        display: none;
+      }
+      .privacy-banner {
+        grid-template-columns: 1fr;
+        padding: 2rem;
+        text-align: center;
+      }
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+      .footer-bottom {
+        flex-direction: column;
+        gap: 1rem;
+        text-align: center;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="ambient-bg"></div>
+
+  <!-- Navigation -->
+  <nav>
+    <div class="container nav-inner">
+      <a href="#" class="brand">
+        <div class="brand-icon-wrap">
+          <img src="app_icon.png" width="44" height="44" alt="FASTIDOX Icon" class="brand-icon" onerror="this.onerror=null; this.src='assets/app_icon.png';">
+        </div>
+        <span class="brand-name">FASTIDOX</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#features">Features</a></li>
+        <li><a href="#stages">Metabolic Stages</a></li>
+        <li><a href="#protocols">Protocols</a></li>
+        <li><a href="#privacy">Privacy</a></li>
+        <li><a href="#faq">FAQ</a></li>
+      </ul>
+
+      <a href="#download" class="btn btn-primary">
+        <span>Get the App</span>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-grid">
+      <div class="hero-content">
+        
+        <!-- App Icon Header Badge -->
+        <div class="hero-app-intro">
+          <div class="hero-app-icon-box">
+            <img src="app_icon.png" width="64" height="64" alt="FASTIDOX App Icon" class="hero-main-icon" onerror="this.onerror=null; this.src='assets/app_icon.png';">
+          </div>
+          <div>
+            <div class="hero-app-title">FASTIDOX</div>
+            <div class="hero-app-tagline">Intermittent Fasting Tracker</div>
+            <div class="hero-app-rating">
+              <span class="stars">★★★★★</span>
+              <span class="rating-text">4.9 • 100% Privacy</span>
+            </div>
+          </div>
+        </div>
+
+        <h1>
+          Smart Intermittent Fasting.<br>
+          <span class="gradient">FASTIDOX</span> Keeps You on Track.
+        </h1>
+
+        <p class="lead">
+          Track your fasting windows with precision, monitor live stages, estimate fat burn, and log hydration and meals — with zero accounts, zero ads, and <strong style="color:#FFF;">100% local privacy</strong>.
+        </p>
+
+        <div class="hero-actions" id="download">
+          <a href="https://github.com/fastidox/Fastidox/releases" class="btn btn-primary" style="padding: 0.9rem 2rem; font-size: 1.05rem;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M17.523 15.3414c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.551 0 .9993.4482.9993.9993.0001.5511-.4483.9997-.9993.9997m-11.046 0c-.5511 0-.9993-.4486-.9993-.9997s.4482-.9993.9993-.9993c.5511 0 .9993.4482.9993.9993 0 .5511-.4482.9997-.9993.9997m11.4045-6.02l1.996-3.4572c.1556-.2692.0631-.6135-.2061-.7691-.2692-.1556-.6135-.0631-.7691.2061l-2.0231 3.5042c-1.6304-.7452-3.4632-1.1648-5.4194-1.1648s-3.789.4196-5.4194 1.1648L4.0198 5.3014c-.1556-.2692-.5-.3617-.7691-.2061-.2692.1556-.3617.5-.2061.7691l1.996 3.4572C2.0833 11.0664.125 14.5458.125 18.5771h23.75c0-4.0313-1.9583-7.5107-4.9945-9.2557"/></svg>
+            <span>Download for Android (Google Play / APK)</span>
+          </a>
+
+          <a href="#features" class="btn btn-secondary">
+            <span>Explore Features</span>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 9l-7 7-7-7"/></svg>
+          </a>
+        </div>
+
+        <div class="hero-trust">
+          <div class="trust-item">
+            <svg viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm3.707 6.707l-4.5 4.5a1 1 0 01-1.414 0l-2-2a1 1 0 111.414-1.414L9 10.586l3.793-3.793a1 1 0 111.414 1.414z"/></svg>
+            <span>No account or sign-up required</span>
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm3.707 6.707l-4.5 4.5a1 1 0 01-1.414 0l-2-2a1 1 0 111.414-1.414L9 10.586l3.793-3.793a1 1 0 111.414 1.414z"/></svg>
+            <span>Local-first • Zero remote servers</span>
+          </div>
+          <div class="trust-item">
+            <svg viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zm3.707 6.707l-4.5 4.5a1 1 0 01-1.414 0l-2-2a1 1 0 111.414-1.414L9 10.586l3.793-3.793a1 1 0 111.414 1.414z"/></svg>
+            <span>Mifflin-St Jeor metabolic model</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Phone Mockup Container -->
+      <div class="mockup-container">
+        <div class="mockup-glow"></div>
+        
+        <div class="phone-frame">
+          <div class="phone-screen">
+            <div class="phone-notch"></div>
+            
+            <!-- In-Phone Header with App Icon -->
+            <div class="mock-header">
+              <div style="display:flex; align-items:center; gap:0.6rem;">
+                <div class="mock-app-icon-mini">
+                  <img src="app_icon.png" width="32" height="32" alt="FASTIDOX" style="width:32px; height:32px; object-fit:cover; display:block;" onerror="this.onerror=null; this.src='assets/app_icon.png';">
+                </div>
+                <div>
+                  <div class="mock-title">FASTIDOX</div>
+                  <span style="font-size:0.7rem; color: var(--text-muted);">Active Fast • 16:8</span>
+                </div>
+              </div>
+              <div class="mock-tag">LIVE • 96%</div>
+            </div>
+
+            <!-- Timer Card -->
+            <div class="mock-timer-card">
+              <div class="timer-circle-wrap">
+                <svg class="timer-svg" viewBox="0 0 160 160">
+                  <defs>
+                    <linearGradient id="timerGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#34D399" />
+                      <stop offset="100%" stop-color="#10B981" />
+                    </linearGradient>
+                  </defs>
+                  <circle class="timer-circle-bg" cx="80" cy="80" r="70" />
+                  <circle class="timer-circle-progress" cx="80" cy="80" r="70" />
+                </svg>
+
+                <div class="timer-center-text">
+                  <div class="timer-val">15:24</div>
+                  <div class="timer-lbl">of 16:00 Hours</div>
+                </div>
+              </div>
+
+              <div class="mock-stage-badge">
+                <span>🔥</span>
+                <span>Stage: Fat Burning & Ketosis</span>
+              </div>
+            </div>
+
+            <!-- Quick Metrics Grid -->
+            <div class="mock-mini-grid">
+              <div class="mock-mini-card">
+                <div class="mini-card-header">
+                  <span>Est. Fat Burned</span>
+                  <span>🔥</span>
+                </div>
+                <div class="mini-card-val">~42g</div>
+                <div class="mini-card-sub">Accelerated Rate</div>
+              </div>
+
+              <div class="mock-mini-card">
+                <div class="mini-card-header">
+                  <span>Water Hydration</span>
+                  <span>💧</span>
+                </div>
+                <div class="mini-card-val">1,750 ml</div>
+                <div class="mini-card-sub">7 of 8 Cups</div>
+              </div>
+            </div>
+
+            <!-- BMI & Weight Card -->
+            <div class="mock-mini-card" style="background: rgba(16, 185, 129, 0.08); border-color: rgba(16, 185, 129, 0.25);">
+              <div class="mini-card-header">
+                <span>Body Mass Index (BMI)</span>
+                <span style="color: #34D399; font-weight:700;">Normal</span>
+              </div>
+              <div style="display:flex; justify-content:space-between; align-items:flex-end;">
+                <div class="mini-card-val" style="color:#34D399;">23.4</div>
+                <span style="font-size:0.75rem; color:var(--text-muted);">Goal: 76.0 kg (4 kg to go)</span>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- Floating Live App Badge -->
+        <div class="floating-icon-card">
+          <div class="floating-icon-img">
+            <img src="app_icon.png" width="42" height="42" alt="FASTIDOX" style="width:42px; height:42px; object-fit:cover; display:block;" onerror="this.onerror=null; this.src='assets/app_icon.png';">
+          </div>
+          <div>
+            <div class="floating-title">FASTIDOX Live</div>
+            <div class="floating-sub">Fat Burning Active 🔥</div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- Metabolic Stages Section -->
+  <section id="stages" style="background: rgba(255, 255, 255, 0.015); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-tag">Science-Backed Physiology</span>
+        <h2 class="section-title">5 Metabolic Stages Tracked Live</h2>
+        <p class="section-desc">
+          As you fast, your body transitions through precise biological transformations. FASTIDOX tracks your exact phase in real time, explaining cellular adaptations step by step.
+        </p>
+      </div>
+
+      <div class="timeline">
+        <!-- Stage 1 -->
+        <div class="stage-card">
+          <span class="stage-time">0 to 4 Hours</span>
+          <div class="stage-icon">🍽️</div>
+          <h3 class="stage-title">Digestion & Absorption</h3>
+          <p class="stage-desc">Your body assimilates nutrients from your last meal. Blood glucose rises and then gently stabilizes.</p>
+        </div>
+
+        <!-- Stage 2 -->
+        <div class="stage-card">
+          <span class="stage-time">4 to 8 Hours</span>
+          <div class="stage-icon">📉</div>
+          <h3 class="stage-title">Insulin Stabilization</h3>
+          <p class="stage-desc">Circulating insulin drops toward baseline levels, allowing the digestive tract its first period of deep rest.</p>
+        </div>
+
+        <!-- Stage 3 -->
+        <div class="stage-card">
+          <span class="stage-time">8 to 12 Hours</span>
+          <div class="stage-icon">⚡</div>
+          <h3 class="stage-title">Glycogen Depletion</h3>
+          <p class="stage-desc">The liver utilizes remaining stored glycogen for energy, preparing metabolic pathways to shift fuel sources.</p>
+        </div>
+
+        <!-- Stage 4 -->
+        <div class="stage-card" style="border-color: rgba(245, 158, 11, 0.4); background: rgba(245, 158, 11, 0.03);">
+          <span class="stage-time" style="color: #F59E0B; background: rgba(245, 158, 11, 0.1);">12 to 18 Hours</span>
+          <div class="stage-icon">🔥</div>
+          <h3 class="stage-title">Fat Burning & Ketosis</h3>
+          <p class="stage-desc">The core metabolic shift: adipose fat oxidation surges, producing ketone bodies that fuel physical and mental energy.</p>
+        </div>
+
+        <!-- Stage 5 -->
+        <div class="stage-card" style="border-color: rgba(16, 185, 129, 0.4); background: rgba(16, 185, 129, 0.03);">
+          <span class="stage-time">18+ Hours</span>
+          <div class="stage-icon">🧬</div>
+          <h3 class="stage-title">Autophagy & Renewal</h3>
+          <p class="stage-desc">Deep cellular cleanup: damaged proteins and dysfunctional cell components are recycled, fostering longevity.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Key Features Grid -->
+  <section id="features">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-tag">Powerful Tracking</span>
+        <h2 class="section-title">Everything You Need for Intermittent Fasting</h2>
+        <p class="section-desc">
+          Built for simple daily tracking, sustainable habit formation, and complete user autonomy.
+        </p>
+      </div>
+
+      <div class="features-grid">
+        <!-- Feature 1 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">⏱️</div>
+          <h3>Adaptive Fasting Timer</h3>
+          <p>Gentle reminders when your eating window opens or closes, with live milestone alerts as you enter new metabolic phases.</p>
+        </div>
+
+        <!-- Feature 2 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">🔥</div>
+          <h3>Scientific BMR & Fat Engine</h3>
+          <p>Personalized Basal Metabolic Rate via Mifflin-St Jeor equation, paired with a graduated fat-oxidation rate displayed in grams.</p>
+        </div>
+
+        <!-- Feature 3 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">🥗</div>
+          <h3>Nutrition Journal & Scoring</h3>
+          <p>Fast meal logging in seconds, coupled with an intelligent diet quality score to help you identify foods that keep you satiated.</p>
+        </div>
+
+        <!-- Feature 4 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">💧</div>
+          <h3>Smart Hydration Tracking</h3>
+          <p>Hydration is foundational to comfortable fasting. One-tap water logging with custom daily goals calculated from body weight.</p>
+        </div>
+
+        <!-- Feature 5 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">⚖️</div>
+          <h3>Weight Journey & BMI Targets</h3>
+          <p>Interactive progress curves, realistic projection models, and clear BMI range indicators calibrated to your height.</p>
+        </div>
+
+        <!-- Feature 6 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">🌿</div>
+          <h3>Rest Days & Refeeds</h3>
+          <p>Continuous fasting without breaks can cause fatigue. Easily schedule rest days to stay consistent and balanced long-term.</p>
+        </div>
+
+        <!-- Feature 7 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">🛡️</div>
+          <h3>Fasting Safety Guidelines</h3>
+          <p>Responsible fasting first. Built-in reminders screen for appropriate eligibility (under 18, pregnancy, special dietary needs).</p>
+        </div>
+
+        <!-- Feature 8 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">🔒</div>
+          <h3>100% Local-First Privacy</h3>
+          <p>Your fasting and personal logs are yours alone. No remote databases, no tracking by advertising brokers, zero cloud leakage.</p>
+        </div>
+
+        <!-- Feature 9 -->
+        <div class="feature-card">
+          <div class="feature-icon-box">⚡</div>
+          <h3>Zero Bloat & Offline Ready</h3>
+          <p>Blazing fast performance, minimal battery consumption, and full functionality even without an active internet connection.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Protocols Section -->
+  <section id="protocols" style="background: rgba(255, 255, 255, 0.015); border-top: 1px solid var(--border-light); border-bottom: 1px solid var(--border-light);">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-tag">Flexible Routines</span>
+        <h2 class="section-title">Choose the Fasting Protocol That Fits Your Life</h2>
+        <p class="section-desc">
+          Whether you are taking your first steps or are an experienced faster, FASTIDOX adapts seamlessly to your routine.
+        </p>
+      </div>
+
+      <div class="protocols-grid">
+        <div class="protocol-card">
+          <div class="protocol-ratio">14:10</div>
+          <h4>Gentle Start</h4>
+          <p>Ideal for beginners. A 14-hour fast with an effortless 10-hour eating window for smooth circadian alignment.</p>
+        </div>
+
+        <div class="protocol-card highlight">
+          <div class="protocol-badge">Most Popular</div>
+          <div class="protocol-ratio">16:8</div>
+          <h4>The Gold Standard</h4>
+          <p>The most validated and sustainable protocol. Superb fat oxidation and improved insulin sensitivity with easy daily scheduling.</p>
+        </div>
+
+        <div class="protocol-card">
+          <div class="protocol-ratio">18:6</div>
+          <h4>Accelerated Ketosis</h4>
+          <p>For intermediate fasters looking to deepen ketosis and reach the threshold of cellular autophagy every day.</p>
+        </div>
+
+        <div class="protocol-card">
+          <div class="protocol-ratio">20:4</div>
+          <h4>The Warrior Diet</h4>
+          <p>A focused 4-hour evening window. Maximizes daytime mental clarity, alert energy, and robust cellular cleansing.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Privacy Banner -->
+  <section id="privacy">
+    <div class="container">
+      <div class="privacy-banner">
+        <div>
+          <h3>🔒 Your Privacy is Inviolable</h3>
+          <p>
+            Unlike mainstream apps that require personal accounts and upload your personal habits and profiles to third-party marketing servers —
+            <strong>FASTIDOX is built from the ground up on a local-first architecture</strong>.
+            Your records stay securely isolated on your device.
+          </p>
+        </div>
+        <div>
+          <a href="privacy-policy.html" class="btn btn-primary" style="white-space: nowrap;">
+            Read Our Privacy Policy
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ Section -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-title-wrap">
+        <span class="section-tag">Frequently Asked Questions</span>
+        <h2 class="section-title">Everything You Need to Know About FASTIDOX</h2>
+      </div>
+
+      <div class="faq-list">
+        <div class="faq-item active">
+          <div class="faq-q">What is intermittent fasting and how does it promote wellness?</div>
+          <div class="faq-a">
+            Intermittent fasting is an eating pattern structured around time windows rather than strict food restrictions. By giving your body extended periods between meals, circulating insulin drops, signaling cells to release stored body fat for energy while activating autophagy and cellular housekeeping pathways.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Do I need to register an account or share my email?</div>
+          <div class="faq-a">
+            No. FASTIDOX requires no registration, no passwords, and no email address. Simply install the app and begin tracking immediately with complete anonymity.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Is intermittent fasting safe for everyone?</div>
+          <div class="faq-a">
+            Intermittent fasting is not suitable for everyone. It is strongly advised against for pregnant or nursing mothers, individuals under 18, anyone with a personal history of eating disorders, or individuals with type 1 diabetes or medications that require meal synchronization. FASTIDOX includes an automated self-screening tool and is not a replacement for certified medical counsel.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">How does FASTIDOX calculate estimated fat burn?</div>
+          <div class="faq-a">
+            The application calculates your personal Basal Metabolic Rate (BMR) using the validated Mifflin-St Jeor formula, tailored to your biological sex, age, height, and weight. It then models a physiological fat-oxidation curve based on hours fasted.
+          </div>
+        </div>
+
+        <div class="faq-item">
+          <div class="faq-q">Can I back up my fasting records if I change phones?</div>
+          <div class="faq-a">
+            Yes. FASTIDOX supports encrypted operating system backup (Android Auto Backup / Google Drive) tied directly to your private Google account, as well as a full manual JSON export and import feature in the Settings screen.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="medical-notice">
+        <strong>Disclaimer:</strong> FASTIDOX is a lifestyle and personal tracking tool for intermittent fasting. It does not provide medical advice, diagnosis, or treatment. Always consult your healthcare provider before undertaking significant dietary changes or extended fasting.
+      </div>
+
+      <div class="footer-grid">
+        <div>
+          <div class="brand">
+            <div class="brand-icon-wrap">
+              <img src="app_icon.png" width="44" height="44" alt="FASTIDOX Icon" class="brand-icon" onerror="this.onerror=null; this.src='assets/app_icon.png';">
+            </div>
+            <span class="brand-name">FASTIDOX</span>
+          </div>
+          <p class="footer-desc">
+            Smart intermittent fasting tracker. Designed with intuitive controls, clear milestones, and absolute user privacy.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h5>Navigation</h5>
+          <ul class="footer-links">
+            <li><a href="#features">Features</a></li>
+            <li><a href="#stages">Metabolic Stages</a></li>
+            <li><a href="#protocols">Protocols</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Legal & Policy</h5>
+          <ul class="footer-links">
+            <li><a href="privacy-policy.html">Privacy Policy</a></li>
+            <li><a href="terms-of-use.html">Terms of Use</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h5>Contact</h5>
+          <ul class="footer-links">
+            <li><a href="mailto:orenliran@gmail.com">orenliran@gmail.com</a></li>
+            <li><a href="https://fastidox.github.io/Fastidox/">Official Website</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>&copy; 2026 FASTIDOX. All rights reserved.</div>
+        <div>Local-First • Privacy Focused • Intermittent Fasting Tracker</div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Simple script for FAQ accordion -->
+  <script>
+    document.querySelectorAll('.faq-item').forEach(item => {
+      item.addEventListener('click', () => {
+        const isActive = item.classList.contains('active');
+        document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
+        if (!isActive) {
+          item.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+</html>
