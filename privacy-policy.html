@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy - FASTIDOX</title>
+<style>
+  :root {
+    --ink: #0F172A; --body: #334155; --muted: #64748B;
+    --rule: #E2E8F0; --bg: #FFFFFF; --accent: #0284C7; --panel: #F8FAFC;
+    --highlight: #EFF6FF; --highlight-border: #BFDBFE;
+  }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --ink: #F1F5F9; --body: #CBD5E1; --muted: #94A3B8;
+      --rule: #1E293B; --bg: #0B1220; --accent: #38BDF8; --panel: #111C2E;
+      --highlight: #172554; --highlight-border: #1E40AF;
+    }
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0; background: var(--bg); color: var(--body);
+    font: 16px/1.65 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+  }
+  main { max-width: 46rem; margin: 0 auto; padding: 3rem 1.25rem 5rem; }
+  h1 { color: var(--ink); font-size: 2.1rem; line-height: 1.2; margin: 0 0 .35rem; }
+  h2 {
+    color: var(--ink); font-size: 1.3rem; margin: 2.4rem 0 .6rem;
+    padding-top: 1.4rem; border-top: 1px solid var(--rule);
+  }
+  h3 { color: var(--ink); font-size: 1.08rem; margin: 1.4rem 0 .4rem; }
+  .updated { color: var(--muted); font-size: .875rem; margin: 0 0 1.75rem; }
+  ul, ol { padding-inline-start: 1.35rem; }
+  li { margin: .35rem 0; }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+  .lede {
+    background: var(--panel); border: 1px solid var(--rule);
+    border-radius: 12px; padding: 1.2rem 1.3rem; margin: 0 0 1.75rem;
+  }
+  .lede p { margin: .4rem 0; }
+  .notice-box {
+    background: var(--highlight); border: 1px solid var(--highlight-border);
+    border-radius: 10px; padding: .9rem 1.15rem; margin: 1.2rem 0;
+  }
+  .notice-box p { margin: .3rem 0; }
+  footer {
+    margin-top: 3.5rem; padding-top: 1.5rem; border-top: 1px solid var(--rule);
+    color: var(--muted); font-size: .875rem; text-align: center;
+  }
+  code {
+    background: var(--panel); border: 1px solid var(--rule);
+    padding: .15rem .35rem; border-radius: 4px; font-size: .9em;
+  }
+</style>
+</head>
+<body>
+<main>
+
+<h1>Privacy Policy</h1>
+<p class="updated">Last updated: October 31, 2026</p>
+
+<div class="lede">
+  <p><strong>Summary:</strong> FASTIDOX ("we", "our", or "the app") is committed to protecting your privacy. The application is built on a <strong>local-first, privacy-by-design architecture</strong>. We do not require you to create an account, and we do not operate a remote server or database storing your personal health data.</p>
+  <p>Your health, fasting, and physical wellness records stay stored securely on your own device. The third-party service providers we use (Google AdMob for advertisements, RevenueCat for subscription management, Sentry for anonymous crash diagnostics, and Android Auto Backup) operate strictly under the transparent disclosures detailed below.</p>
+</div>
+
+<h2>1. Scope &amp; Controller Information</h2>
+<p>This Privacy Policy applies to the FASTIDOX mobile application available on the Google Play Store (and other authorized mobile app marketplaces). If you have any inquiries, requests, or privacy concerns, you can reach our team at: <a href="mailto:matrif.studio@gmail.com">matrif.studio@gmail.com</a>.</p>
+
+<h2>2. Information Stored Locally on Your Device</h2>
+<p>Because FASTIDOX is an intermittent fasting, hydration, and wellness tracking tool, the application processes information that you voluntarily enter into the interface. <strong>All personal and health-related data listed below is stored solely within the local sandboxed storage on your device (AsyncStorage). It is never transmitted to us or to any third party. The only copy that leaves your device is your own encrypted Android Auto Backup, if it is enabled (see Section 3.D).</strong></p>
+
+<h3>A. Profile &amp; Physical Metrics</h3>
+<ul>
+  <li>Display name or nickname (optional, used only to personalize in-app interface greetings)</li>
+  <li>Biological sex, age, height, current body weight, and target weight</li>
+  <li>Body fat percentage and self-selected body build / muscularity (if provided)</li>
+  <li>Personal wellness objectives, daily physical activity levels, and prior fasting experience</li>
+  <li>Training habits: typical workouts per week and how long you have been training (if provided)</li>
+</ul>
+
+<h3>B. Health &amp; Safety Screening Data</h3>
+<p>To assist in user safety and provide automated safeguards against medically inappropriate fasting protocols, the app presents an initial self-screening questionnaire that asks whether any of the following apply:</p>
+<ul>
+  <li>Pregnancy, planning pregnancy, or breastfeeding</li>
+  <li>History or current diagnosis of eating disorders (e.g., anorexia, bulimia, binge eating)</li>
+  <li>Type 1 diabetes or diabetes managed with medication/insulin</li>
+  <li>Prescription medications that must be consumed with meals or on a strict schedule</li>
+  <li>Other chronic illnesses or metabolic conditions</li>
+</ul>
+<div class="notice-box">
+  <p><strong>Strict Privacy Guarantee:</strong> Your responses to the health screening questionnaire are processed <strong>exclusively by on-device algorithms</strong> to display appropriate warnings and safety guidelines. They are <strong>never</strong> sent to us, never shared with third parties, and never used for marketing or advertising purposes. Like the rest of your data, they are included in your own encrypted Android Auto Backup if you have it enabled (Section 3.D). Some answers (for example, an eating disorder, pregnancy or breastfeeding) close the restrictive programs in the app; that decision is also made on your device.</p>
+</div>
+
+<h3>C. Fasting &amp; Activity Logs</h3>
+<ul>
+  <li>Fasting records: start and end timestamps, planned vs. actual duration, and metabolic stage milestones</li>
+  <li>Hydration logs: daily water intake amounts and reminders</li>
+  <li>Nutrition logs: meal timestamps, meal quality ratings, portion answers (carbohydrates, sugar, protein, vegetables and, if you enable the advanced meal details, fat and number of alcoholic drinks), calorie figures you enter or adjust, and whether you marked a day's meals as complete</li>
+  <li>Workouts, activity sessions, and metabolic rest days</li>
+  <li>Daily step counts, estimated distance and calories, and weekly active minutes</li>
+  <li>Weight log entries and historical progress over time</li>
+  <li>Sleep logs and your sleep goal</li>
+  <li>Leptin Diet program progress: the days you mark, the foods you reintroduce and how you reacted to them</li>
+  <li>Habit stages: your habit answers, daily habit check-ins and the milestones you reach</li>
+</ul>
+
+<h3>D. Menstrual Cycle (Optional)</h3>
+<p>If you turn on cycle tracking in your profile settings, the app stores the <strong>first day of your most recent period and your typical cycle length</strong>. It is off by default and offered only for a profile whose sex is set to female or other.</p>
+<ul>
+  <li><strong>Purpose:</strong> used only by the on-device weight estimate, to explain the temporary water weight many people carry before and at the start of a period, so that it is not read as fat gained.</li>
+  <li><strong>Never shared:</strong> this information is <strong>never</strong> transmitted to any server, never shared with advertisers, Sentry or any other third party, never used for advertising, and is redacted from crash reports.</li>
+  <li><strong>Your control:</strong> you can turn cycle tracking off at any time, which removes the stored dates from your profile. Like all other data, it is included in backups you export yourself and in Android Auto Backup (see Section 3.D), and it is erased by <em>Delete all my data</em>.</li>
+</ul>
+
+<h3>E. App Preferences &amp; Settings</h3>
+<ul>
+  <li>Selected fasting schedule (e.g., 16:8, 18:6, 20:4, or custom) and daily start hour</li>
+  <li>Local notification preferences and quiet hours</li>
+  <li>User interface language preference</li>
+  <li>Meal logging preferences (advanced meal details on or off, and whether to hide the alcohol question)</li>
+  <li>Timestamp confirming your acceptance of the Medical Disclaimer</li>
+</ul>
+
+<h2>3. Third-Party Services &amp; SDK Disclosures</h2>
+<p>To support the free tier with advertising, process optional in-app subscriptions, and ensure app stability across various Android devices, FASTIDOX integrates certified third-party software development kits (SDKs). These services process technical, diagnostic, or transactional data as described below:</p>
+
+<h3>A. Google AdMob (Advertising)</h3>
+<p>The free version of FASTIDOX displays advertisements served by <strong>Google AdMob</strong> (Google LLC):</p>
+<ul>
+  <li><strong>Data Collected:</strong> Google Advertising ID (AAID / GAID on Android, IDFA on iOS), device identifiers, IP address (used for approximate coarse location at the city/country level and ad fraud detection), device model, OS version, and ad interaction metrics.</li>
+  <li><strong>Non-Personalized Ads &amp; Privacy:</strong> The app is configured to request non-personalized ads (NPA) in compliance with Google Play Developer Policies and data safety standards. No keywords, content or health information from the app is included in ad requests.</li>
+  <li><strong>Consent (EEA, UK):</strong> Where the law requires it, the app shows Google's consent form before any ad is requested. You can change your choice at any time in <em>Settings &rarr; Subscription &rarr; Ad privacy choices</em>.</li>
+  <li><strong>Subscribers:</strong> FASTIDOX Premium subscribers are not shown ads.</li>
+  <li><strong>Complete Isolation:</strong> FASTIDOX <strong>never</strong> shares, links, transfers, or correlates your personal health data, weight, age, fasting metrics, or health screening responses with Google AdMob or any third-party advertisers.</li>
+  <li>For further details, consult <a href="https://policies.google.com/technologies/ads" target="_blank" rel="noopener">Google's Advertising Privacy Policy</a>.</li>
+</ul>
+
+<h3>B. RevenueCat &amp; Google Play Billing (Subscriptions)</h3>
+<p>If you choose to purchase an optional premium subscription or in-app upgrade, the transaction is processed securely through <strong>Google Play Billing</strong>, with entitlement management handled by <strong>RevenueCat</strong>:</p>
+<ul>
+  <li><strong>Data Processed:</strong> RevenueCat receives an anonymous App User ID, transaction receipt/token, and entitlement status to unlock premium features and facilitate subscription restoration across your devices.</li>
+  <li><strong>No Payment Card Data Held:</strong> FASTIDOX never receives, stores, or accesses your credit card, debit card, or financial billing credentials. All payment processing is conducted securely by Google Play.</li>
+  <li>For more information, visit <a href="https://www.revenuecat.com/privacy/" target="_blank" rel="noopener">RevenueCat's Privacy Policy</a>.</li>
+</ul>
+
+<h3>C. Sentry (Technical Crash &amp; Error Reporting)</h3>
+<p>We use <strong>Sentry</strong> (Functional Software, Inc.) to detect, diagnose, and resolve technical bugs and application crashes:</p>
+<ul>
+  <li><strong>Data Collected:</strong> Technical stack traces, error codes, device hardware specifications, operating system version, app build number, and timestamp of the incident.</li>
+  <li><strong>Strict Data Sanitization:</strong> Crash telemetry is filtered before transmission to guarantee that <strong>no personal profile data, fasting logs, or health screening answers</strong> are ever included. Reports are not linked to identifiable user accounts.</li>
+  <li>Learn more at <a href="https://sentry.io/privacy/" target="_blank" rel="noopener">Sentry's Privacy Policy</a>.</li>
+</ul>
+
+<h3>D. Android Auto Backup (Google Drive)</h3>
+<p>FASTIDOX supports Android's standard Auto Backup feature. If enabled on your device, the Android operating system periodically uploads an encrypted snapshot of the app's local sandbox data to <strong>your personal Google Drive storage</strong>. This ensures that your fasting history is retained when you migrate to a new device.</p>
+<ul>
+  <li>This backup is transmitted directly between your device and Google's infrastructure. We have no access to your Google Drive account or your backup archives.</li>
+  <li>You can disable this feature at any time through your device settings under <em>Settings &rarr; Google &rarr; Backup</em>.</li>
+</ul>
+
+<h3>E. Health Connect &amp; the Device Step Counter (Android)</h3>
+<p>FASTIDOX can count steps with your phone's built-in step sensor, or read activity data from <strong>Health Connect</strong> if you choose to connect it:</p>
+<ul>
+  <li><strong>Permissions:</strong> Physical activity recognition (for the on-device step sensor), and Health Connect read access to <em>Steps</em> and <em>Exercise sessions</em>. Each is requested only when you turn the feature on, and can be revoked at any time in Android settings or the Health Connect app.</li>
+  <li><strong>How the data is used:</strong> Solely to show your daily and weekly step and activity progress, to adjust your activity goals, and to add workouts you recorded elsewhere to your training log. The data is stored only on your device, alongside your other logs.</li>
+  <li><strong>No sharing:</strong> Data read from Health Connect is never sent to us, to advertisers, to Sentry, or to any other third party, and is never used for advertising. FASTIDOX only reads from Health Connect; it never writes to it.</li>
+  <li><strong>Limited Use:</strong> FASTIDOX's use of information received from Health Connect adheres to the <a href="https://support.google.com/googleplay/android-developer/answer/12991134">Health Connect Permissions policy</a>, including its Limited Use requirements.</li>
+</ul>
+
+<h2>4. Local Notifications</h2>
+<p>FASTIDOX schedules reminders (such as fasting start/end notifications and hydration prompts) exclusively using your device's <strong>local notification scheduler</strong> (via Notifee). No external push notification tokens, remote dispatch servers, or third-party message brokers are involved. You may configure or disable notifications at any time in the app's settings or via system settings.</p>
+
+<h2>5. Practices We Do NOT Engage In</h2>
+<ul>
+  <li>We do <strong>not</strong> sell, rent, monetize, or trade your personal or health data.</li>
+  <li>We do <strong>not</strong> require user accounts, email sign-ups, or social logins.</li>
+  <li>We do <strong>not</strong> access your precise GPS location.</li>
+  <li>We do <strong>not</strong> access your contacts, camera, photo library, microphone, or external storage files.</li>
+  <li>We do <strong>not</strong> provide health data to data brokers, ad networks, or third-party marketers.</li>
+</ul>
+
+<h2>6. Data Retention, Portability &amp; Instant Deletion</h2>
+<p>In full alignment with the Google Play Data Deletion Policy and global privacy standards, you maintain absolute control over all information stored by the app:</p>
+<ul>
+  <li><strong>Instant Local Deletion:</strong> You can permanently wipe all logs, profile information, and health screening records directly within the app at any time via: <code>Settings &rarr; Backup &amp; restore &rarr; Delete all my data</code>.</li>
+  <li><strong>App Uninstallation:</strong> Uninstalling FASTIDOX removes all local sandbox files and cached data from your device. If Android Auto Backup is enabled, Google keeps your last backup in your Google Drive and may restore it if you reinstall the app; you can delete it in your Google account (<em>Google Drive &rarr; Backups</em>) or by turning backup off. To remove everything immediately, use <em>Delete all my data</em> before uninstalling.</li>
+  <li><strong>Data Export:</strong> You can generate and download a complete JSON export of your stored records at any time via: <code>Settings &rarr; Backup &amp; restore &rarr; Export Backup</code>.</li>
+  <li><strong>No Server-Side Retention:</strong> Because we do not store your data on external servers, there is no server-side retention period and no residual data stored by us once deleted locally.</li>
+  <li><strong>Deletion requests:</strong> step-by-step instructions, and how to ask us to delete what our service providers hold, are at <a href="delete-data.html">fastidox.github.io/Fastidox/delete-data.html</a>.</li>
+</ul>
+
+<h2>7. Children's Privacy (18+ Policy)</h2>
+<p>FASTIDOX is strictly intended for individuals who are <strong>at least 18 years of age</strong>, and the app does not offer its fasting tools to anyone who enters an age under 18. Intermittent fasting can cause physiological imbalances and growth complications in minors. We do not knowingly market to, collect, or process information from individuals under 18 years of age. If we learn that an individual under 18 has submitted data, we will immediately take steps to ensure that data is deleted.</p>
+
+<h2>8. International Privacy Rights (GDPR, CCPA/CPRA, Global Standards)</h2>
+<p>Regardless of your geographic location, FASTIDOX respects your international privacy rights:</p>
+<ul>
+  <li><strong>European Economic Area (EEA) &amp; UK (GDPR / UK GDPR):</strong> You have the right to access, rectify, erase, restrict, and export your personal data. Because all information is stored locally on your device, you exercise these rights directly through the app (editing profile, exporting backup, deleting all data).</li>
+  <li><strong>California Residents (CCPA / CPRA):</strong> We do not sell or share your personal information. You have the right to know what data is collected and to request its complete deletion.</li>
+  <li><strong>Global Users:</strong> Our privacy-by-design, local-first model adheres to fair information practices and data minimization principles worldwide.</li>
+</ul>
+
+<h2>9. Changes to This Privacy Policy</h2>
+<p>We may update this Privacy Policy from time to time to reflect enhancements to our features, updates in third-party SDKs, or changes in legal requirements. The updated date at the top of this page will always reflect the latest revision. Material changes affecting data handling will also be highlighted in app release notes.</p>
+
+<h2>10. Contact Us</h2>
+<p>If you have any questions, feedback, or inquiries concerning this Privacy Policy, please contact us at:</p>
+<ul>
+  <li><strong>Email:</strong> <a href="mailto:matrif.studio@gmail.com">matrif.studio@gmail.com</a></li>
+  <li><strong>Application:</strong> FASTIDOX</li>
+</ul>
+
+<footer>
+  <p>&copy; 2026 FASTIDOX. All rights reserved.</p>
+</footer>
+
+</main>
+</body>
+</html>
